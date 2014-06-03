@@ -1,7 +1,7 @@
 /**
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2012-2013 ForgeRock AS. All Rights Reserved
+ * Copyright (c) 2012-2014 ForgeRock AS. All Rights Reserved
  *
  * The contents of this file are subject to the terms
  * of the Common Development and Distribution License
@@ -30,7 +30,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import org.forgerock.openam.oauth2.model.CoreToken;
+import org.forgerock.openam.oauth2.legacy.CoreToken;
 import org.forgerock.openam.oauth2.provider.Scope;
 
 /**
@@ -41,8 +41,8 @@ import org.forgerock.openam.oauth2.provider.Scope;
  * and implements the default mechanisms for the three {@code scope*} methods.
  *
  * This custom scope plugin instead implements simple versions
- * of {@link #evaluateScope(org.forgerock.openam.oauth2.model.CoreToken)}
- * and of {@link #getUserInfo(org.forgerock.openam.oauth2.model.CoreToken)}.
+ * of {@link #evaluateScope(org.forgerock.openam.oauth2.legacy.CoreToken)}
+ * and of {@link #getUserInfo(org.forgerock.openam.oauth2.legacy.CoreToken)}.
  *
  * The {@code evaluateScope} method populates scope values returned in the
  * JSON with the token information.

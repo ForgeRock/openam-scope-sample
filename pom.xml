@@ -2,7 +2,7 @@
 <!--
    DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
 
-   Copyright (c) 2013 ForgeRock AS. All Rights Reserved
+   Copyright (c) 2013-2014 ForgeRock AS. All Rights Reserved
 
    The contents of this file are subject to the terms
    of the Common Development and Distribution License
@@ -41,17 +41,30 @@
         <repository>
             <id>forgerock-releases</id>
             <url>http://maven.forgerock.org/repo/releases</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
         </repository>
         <repository>
             <id>forgerock-snapshots</id>
-            <url>http://maven.forgerock.org/repo/openam-snapshots</url>
+            <url>http://maven.forgerock.org/repo/snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
         </repository>
     </repositories>
 
     <dependencies>
         <dependency>
             <groupId>org.forgerock.openam</groupId>
-            <artifactId>openam-oauth2-common</artifactId>
+            <artifactId>oauth2-core</artifactId>
+            <version>${openam.version}</version>
+        </dependency>
+
+        <!-- Deprecated for 12.0.0 -->
+        <dependency>
+            <groupId>org.forgerock.openam</groupId>
+            <artifactId>openam-oauth2</artifactId>
             <version>${openam.version}</version>
         </dependency>
     </dependencies>
