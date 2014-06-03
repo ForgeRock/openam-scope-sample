@@ -50,7 +50,7 @@ import org.forgerock.openam.oauth2.provider.Scope;
  * The {@code getUserInfo} method populates scope values and the user ID
  * returned in the JSON.
  */
-public class CustomScope implements Scope {
+public class DeprecatedCustomScope implements Scope {
 
     private Map<String,Object> mapScopes(CoreToken token) {
         Set<String> scopes = token.getScope();
