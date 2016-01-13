@@ -1,7 +1,7 @@
 /**
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2014 ForgeRock AS. All Rights Reserved
+ * Copyright (c) 2014-2016 ForgeRock AS. All Rights Reserved
  *
  * The contents of this file are subject to the terms
  * of the Common Development and Distribution License
@@ -30,7 +30,9 @@ import org.forgerock.oauth2.core.ClientRegistration;
 import org.forgerock.oauth2.core.OAuth2Request;
 import org.forgerock.oauth2.core.ScopeValidator;
 import org.forgerock.oauth2.core.Token;
+import org.forgerock.oauth2.core.UserInfoClaims;
 import org.forgerock.oauth2.core.exceptions.InvalidClientException;
+import org.forgerock.oauth2.core.exceptions.NotFoundException;
 import org.forgerock.oauth2.core.exceptions.ServerException;
 import org.forgerock.oauth2.core.exceptions.UnauthorizedClientException;
 
@@ -91,7 +93,8 @@ public class CustomScopeValidator implements ScopeValidator {
     @Override
     public Set<String> validateAuthorizationScope(
             ClientRegistration clientRegistration,
-            Set<String> scope) {
+            Set<String> scope,
+            OAuth2Request request) {
         if (scope == null || scope.isEmpty()) {
             return clientRegistration.getDefaultScopes();
         }
@@ -132,6 +135,17 @@ public class CustomScopeValidator implements ScopeValidator {
         return scopes;
     }
 
+    @Override
+    public UserInfoClaims getUserInfo(
+            AccessToken token,
+            OAuth2Request request)
+            throws UnauthorizedClientException, NotFoundException {
+        Map<String, Object> response = mapScopes(token);
+        response.put("sub", token.getResourceOwnerId());
+        UserInfoClaims claims = new UserInfoClaims(response, null);
+        return claims;
+    }
+
     /**
      * Set read and write permissions according to scope.
      *
@@ -153,16 +167,6 @@ public class CustomScopeValidator implements ScopeValidator {
             }
         }
         return map;
-    }
-
-    @Override
-    public Map<String, Object> getUserInfo(
-            AccessToken token,
-            OAuth2Request request)
-            throws UnauthorizedClientException {
-        Map<String, Object> response = mapScopes(token);
-        response.put("sub", token.getResourceOwnerId());
-        return response;
     }
 
     @Override

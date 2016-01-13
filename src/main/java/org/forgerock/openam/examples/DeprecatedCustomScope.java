@@ -1,7 +1,7 @@
 /**
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2012-2014 ForgeRock AS. All Rights Reserved
+ * Copyright (c) 2012-2016 ForgeRock AS. All Rights Reserved
  *
  * The contents of this file are subject to the terms
  * of the Common Development and Distribution License
@@ -30,6 +30,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.forgerock.oauth2.core.UserInfoClaims;
 import org.forgerock.openam.oauth2.legacy.CoreToken;
 import org.forgerock.openam.oauth2.provider.Scope;
 
@@ -87,10 +88,10 @@ public class DeprecatedCustomScope implements Scope {
     }
 
     @Override
-    public Map<String, Object> getUserInfo(CoreToken token) {
+    public UserInfoClaims getUserInfo(CoreToken token) {
         Map<String, Object> response = mapScopes(token);
         response.put("sub", token.getUserID());
-        return response;
+        return new UserInfoClaims(response, null);
     }
 
     @Override
