@@ -1,5 +1,10 @@
 # openam-scope-sample
 
+## Warning
+**This code is not supported by ForgeRock and it is your responsibility to verify that the software is suitable and safe for use.**
+
+## About
+
 *An OpenAM Sample OAuth 2.0 Scope Validator Plugin*
 
 For instructions on using this sample OAuth 2.0 scope validator plugin
