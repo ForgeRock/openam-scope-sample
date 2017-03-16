@@ -1,5 +1,10 @@
 # openam-scope-sample
 
+This is one of the ForgeRock Community Projects.
+For details, see <https://stash.forgerock.org/projects/COM/repos/about-these-projects/browse>.
+
+If you are reading this on GitHub.com, you are viewing an old version of the project.
+
 ## Warning
 **This code is not supported by ForgeRock and it is your responsibility to verify that the software is suitable and safe for use.**
 
@@ -7,29 +12,15 @@
 
 *An OpenAM Sample OAuth 2.0 Scope Validator Plugin*
 
-For instructions on using this sample OAuth 2.0 scope validator plugin
-with OpenAM see the chapter,
-*[Customizing OAuth 2.0 Scope Handling](http://openam.forgerock.org/openam-documentation/openam-doc-source/doc/dev-guide/index/chap-oauth2-scopes.html)*,
-in the OpenAM *Developer's Guide*.
+For instructions on using this sample OAuth 2.0 scope validator plugin,
+see <https://backstage.forgerock.com/docs/am/5/oauth2-guide#chap-oauth2-customization>.
 
 Before building the sample scope validator plugin,
-update the OpenAM version in the POM
-to match the version of OpenAM that you are using.
-
-The line to update is:
-
-    <openam.version>12.0.0-SNAPSHOT</openam.version>
-
-For versions earlier than 12.0.0-SNAPSHOT,
-use the `DeprecatedCustomScope` plugin with OpenAM instead.
+update the `<openam.version>` property in the POM to match your OpenAM version.
 
 * * *
+Copyright 2013-2017 ForgeRock AS. All Rights Reserved
 
-This work is licensed under the Creative Commons
-Attribution-NonCommercial-NoDerivs 3.0 Unported License.
-To view a copy of this license, visit
-<http://creativecommons.org/licenses/by-nc-nd/3.0/>
-or send a letter to Creative Commons, 444 Castro Street,
-Suite 900, Mountain View, California, 94041, USA.
-
-Copyright 2013-2014 ForgeRock AS
+Use of this code requires a commercial software license with ForgeRock AS.
+or with one of its affiliates. All use shall be exclusively subject
+to such license between the licensee and ForgeRock AS.
