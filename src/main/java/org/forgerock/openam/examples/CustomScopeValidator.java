@@ -1,26 +1,9 @@
-/**
- * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
+/*
+ * Copyright 2014-2017 ForgeRock AS. All Rights Reserved
  *
- * Copyright (c) 2014 ForgeRock AS. All Rights Reserved
- *
- * The contents of this file are subject to the terms
- * of the Common Development and Distribution License
- * (the License). You may not use this file except in
- * compliance with the License.
- *
- * You can obtain a copy of the License at
- * http://forgerock.org/license/CDDLv1.0.html
- * See the License for the specific language governing
- * permission and limitations under the License.
- *
- * When distributing Covered Code, include this CDDL
- * Header Notice in each file and include the License file
- * at http://forgerock.org/license/CDDLv1.0.html
- * If applicable, add the following below the CDDL Header,
- * with the fields enclosed by brackets [] replaced by
- * your own identifying information:
- * "Portions Copyrighted [year] [name of copyright owner]"
- *
+ * Use of this code requires a commercial software license with ForgeRock AS.
+ * or with one of its affiliates. All use shall be exclusively subject
+ * to such license between the licensee and ForgeRock AS.
  */
 
 package org.forgerock.openam.examples;
@@ -30,6 +13,7 @@ import org.forgerock.oauth2.core.ClientRegistration;
 import org.forgerock.oauth2.core.OAuth2Request;
 import org.forgerock.oauth2.core.ScopeValidator;
 import org.forgerock.oauth2.core.Token;
+import org.forgerock.oauth2.core.UserInfoClaims;
 import org.forgerock.oauth2.core.exceptions.InvalidClientException;
 import org.forgerock.oauth2.core.exceptions.ServerException;
 import org.forgerock.oauth2.core.exceptions.UnauthorizedClientException;
@@ -91,7 +75,8 @@ public class CustomScopeValidator implements ScopeValidator {
     @Override
     public Set<String> validateAuthorizationScope(
             ClientRegistration clientRegistration,
-            Set<String> scope) {
+            Set<String> scope,
+            OAuth2Request oAuth2Request) {
         if (scope == null || scope.isEmpty()) {
             return clientRegistration.getDefaultScopes();
         }
@@ -156,13 +141,14 @@ public class CustomScopeValidator implements ScopeValidator {
     }
 
     @Override
-    public Map<String, Object> getUserInfo(
+    public UserInfoClaims getUserInfo(
             AccessToken token,
             OAuth2Request request)
             throws UnauthorizedClientException {
         Map<String, Object> response = mapScopes(token);
         response.put("sub", token.getResourceOwnerId());
-        return response;
+        UserInfoClaims userInfoClaims = new UserInfoClaims(response, null);
+        return userInfoClaims;
     }
 
     @Override
