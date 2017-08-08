@@ -31,6 +31,7 @@ import org.forgerock.oauth2.core.OAuth2Request;
 import org.forgerock.oauth2.core.ScopeValidator;
 import org.forgerock.oauth2.core.Token;
 import org.forgerock.oauth2.core.exceptions.InvalidClientException;
+import org.forgerock.oauth2.core.exceptions.InvalidScopeException;
 import org.forgerock.oauth2.core.exceptions.ServerException;
 import org.forgerock.oauth2.core.exceptions.UnauthorizedClientException;
 
@@ -88,10 +89,14 @@ import java.util.Set;
  * </ul>
  */
 public class CustomScopeValidator implements ScopeValidator {
-    @Override
-    public Set<String> validateAuthorizationScope(
-            ClientRegistration clientRegistration,
-            Set<String> scope) {
+	
+	@Override
+	public Set<String> validateAuthorizationScope(
+			ClientRegistration clientRegistration, 
+			Set<String> scope, 
+			OAuth2Request oauthRequest)
+			throws InvalidScopeException, ServerException {
+		// TODO Auto-generated method stub
         if (scope == null || scope.isEmpty()) {
             return clientRegistration.getDefaultScopes();
         }
@@ -100,8 +105,8 @@ public class CustomScopeValidator implements ScopeValidator {
                 clientRegistration.getAllowedScopes());
         scopes.retainAll(scope);
         return scopes;
-    }
-
+	}
+	
     @Override
     public Set<String> validateAccessTokenScope(
             ClientRegistration clientRegistration,
@@ -184,4 +189,6 @@ public class CustomScopeValidator implements ScopeValidator {
             throws ServerException, InvalidClientException {
         // No special handling
     }
+
+
 }
